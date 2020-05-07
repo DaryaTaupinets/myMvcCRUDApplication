@@ -8,19 +8,26 @@ import java.util.Objects;
 public class User {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "age")
     private Byte age;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "location")
     private String location;
 
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "role")
     private String role;
 
     public User() {

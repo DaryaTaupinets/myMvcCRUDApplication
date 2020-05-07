@@ -1,10 +1,12 @@
 package web.dao;
 
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
 import javax.persistence.TypedQuery;
@@ -13,16 +15,19 @@ import java.util.List;
 @Repository
 public class UserDaoImpl implements UserDao {
 
+    private static final Logger log = LoggerFactory.getLogger(UserDaoImpl.class);
+
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Transactional
     @Override
     public void addUser(User user) {
         sessionFactory.getCurrentSession().save(user);
+        log.info("User is successfully saved. User details: " + user);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<User> getAllUsers() {
         TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
         return query.getResultList();
@@ -38,8 +43,8 @@ public class UserDaoImpl implements UserDao {
         return sessionFactory.getCurrentSession().get(User.class, name);
     }
 
-    @Transactional
     @Override
+    @SuppressWarnings("unchecked")
     public User getUserByNameAndPassword(String name, String password) {
         User userLogin = null;
         TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User where name = :paramName");
@@ -53,13 +58,12 @@ public class UserDaoImpl implements UserDao {
         return userLogin;
     }
 
-    @Transactional
     @Override
     public void updateUser(User user) {
         sessionFactory.getCurrentSession().update(user);
+        log.info("User is successfully update. User details: " + user);
     }
 
-    @Transactional
     @Override
     public void deleteUserById(Integer id) {
         Session session = sessionFactory.getCurrentSession();
@@ -67,5 +71,6 @@ public class UserDaoImpl implements UserDao {
         if (user != null) {
             session.delete(user);
         }
+        log.info("User is successfully delete. User details: " + user);
     }
 }

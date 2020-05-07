@@ -15,7 +15,11 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import web.dao.UserDao;
+import web.dao.UserDaoImpl;
 import web.model.User;
+import web.service.UserService;
+import web.service.UserServiceImpl;
 
 import javax.sql.DataSource;
 import java.util.Properties;
