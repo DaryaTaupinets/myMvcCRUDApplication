@@ -10,16 +10,13 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-import web.dao.UserDao;
-import web.dao.UserDaoImpl;
 import web.model.User;
-import web.service.UserService;
-import web.service.UserServiceImpl;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -27,6 +24,7 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableWebMvc
+@EnableTransactionManagement
 @ComponentScan("web")
 public class WebConfig implements WebMvcConfigurer {
 
