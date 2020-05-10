@@ -8,19 +8,27 @@ import web.model.User;
 import web.service.UserService;
 
 @Controller
+@RequestMapping("/")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/admin")
+    @GetMapping(value = "admin")
     public String listUsers(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("listUser", userService.getAllUsers());
         return "admin-page";
     }
 
-    @PostMapping("/admin/create")
+    @GetMapping(value = "admin/create")
+    public String formAddUser(Model model) {
+        model.addAttribute("user", new User());
+        return "user-form";
+    }
+
+
+    @PostMapping(value = "admin/create")
     public String addUser(@ModelAttribute("user") User user) {
         if (user.getId() != null) {
             userService.addUser(user);
@@ -32,7 +40,7 @@ public class UserController {
 
     @RequestMapping("/admin/delete")
     public String deleteUser(@PathVariable("id") int id) {
-        userService.deleteUserById(id);
+        userService.deleteUser(id);
         return "redirect: /admin-page";
     }
 

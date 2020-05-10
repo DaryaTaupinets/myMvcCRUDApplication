@@ -65,7 +65,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteUserById(Integer id) {
+    public void deleteUser(Integer id) {
         Session session = sessionFactory.getCurrentSession();
         User user = session.get(User.class, id);
         if (user != null) {

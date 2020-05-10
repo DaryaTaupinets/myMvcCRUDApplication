@@ -18,7 +18,7 @@
          style="background-color: dodgerblue">
         <div>
             <h1>My first CRUD Application</h1>
-            <h2><a href="${pageContext.request.contextPath}/admin">
+            <h2><a href="/admin">
                 <button type="button" class="btn btn-secondary">User's list</button>
             </a></h2>
         </div>

@@ -18,7 +18,7 @@
          style="background-color: dodgerblue">
         <div>
             <h1>My first CRUD Application</h1>
-            <h2><a href="${pageContext.request.contextPath}/admin">
+            <h2><a href="/admin">
                 <button type="button" class="btn btn-secondary">User's list</button>
             </a></h2>
         </div>
@@ -33,7 +33,7 @@
         <h1 class="text-center">User's list</h1>
         <hr>
         <div class="container text-left">
-            <a href="${pageContext.request.contextPath}/admin/create" class="btn btn-primary">Add New User</a>
+            <a href="/admin/create" class="btn btn-primary">Add New User</a>
         </div>
         <br>
 
@@ -52,7 +52,7 @@
             </thead>
             <tbody>
 
-            <c:forEach var="user" items="${userList}">
+            <c:forEach var="user" items="${listUser}">
                 <tr>
                     <td><c:out value="${user.id}"/></td>
                     <td><c:out value="${user.name}"/></td>
