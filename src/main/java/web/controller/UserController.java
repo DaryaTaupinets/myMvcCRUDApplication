@@ -22,14 +22,14 @@ public class UserController {
 
     @GetMapping(value = "admin/create")
     public String formAddUser(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", null);
         return "user-form";
     }
 
 
     @PostMapping(value = "admin/create")
     public String addUser(@ModelAttribute("user") User user) {
-            userService.addUser(user);
+        userService.addUser(user);
         return "redirect:/admin";
     }
 
@@ -40,8 +40,20 @@ public class UserController {
     }
 
     @GetMapping("/admin/update")
-    public String editUser(@RequestParam("id") Integer id, Model model) {
+    public String editForm(@RequestParam("id") Integer id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "user-form";
+    }
+
+    @PostMapping("/admin/update")
+    public String editUser(@ModelAttribute("user") User user) {
+        userService.updateUser(user);
+        return "redirect:/admin";
+    }
+
+    @GetMapping(value = "user")
+    public String showUserPage(Model model) {
+        model.addAttribute("user", null);
+        return "user-page";
     }
 }
