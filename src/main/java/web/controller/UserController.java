@@ -16,7 +16,6 @@ public class UserController {
 
     @GetMapping(value = "admin")
     public String listUsers(Model model) {
-        model.addAttribute("user", new User());
         model.addAttribute("listUser", userService.getAllUsers());
         return "admin-page";
     }
@@ -30,24 +29,19 @@ public class UserController {
 
     @PostMapping(value = "admin/create")
     public String addUser(@ModelAttribute("user") User user) {
-        if (user.getId() != null) {
             userService.addUser(user);
-        } else {
-            userService.updateUser(user);
-        }
-        return "redirect: /admin-page";
+        return "redirect:/admin";
     }
 
-    @RequestMapping("/admin/delete")
-    public String deleteUser(@PathVariable("id") int id) {
+    @GetMapping("/admin/delete")
+    public String deleteUser(@RequestParam("id") Integer id) {
         userService.deleteUser(id);
-        return "redirect: /admin-page";
+        return "redirect:/admin";
     }
 
-    @RequestMapping("/admin/update")
-    public String editUser(@PathVariable("id") int id, Model model) {
+    @GetMapping("/admin/update")
+    public String editUser(@RequestParam("id") Integer id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
-        model.addAttribute("listUser", userService.getAllUsers());
-        return "admin-page";
+        return "user-form";
     }
 }

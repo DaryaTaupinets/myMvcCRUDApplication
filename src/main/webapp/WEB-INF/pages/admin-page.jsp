@@ -53,6 +53,18 @@
             <tbody>
 
             <c:forEach var="user" items="${listUser}">
+
+
+                <!-- construct an "update" link with customer id -->
+                <c:url var="updateLink" value="/admin/update">
+                    <c:param name="id" value="${user.id}"/>
+                </c:url>
+
+                <!-- construct an "delete" link with customer id -->
+                <c:url var="deleteLink" value="/admin/delete">
+                    <c:param name="id" value="${user.id}"/>
+                </c:url>
+
                 <tr>
                     <td><c:out value="${user.id}"/></td>
                     <td><c:out value="${user.name}"/></td>
@@ -61,17 +73,21 @@
                     <td><c:out value="${user.location}"/></td>
                     <td><c:out value="${user.password}"/></td>
                     <td><c:out value="${user.role}"/></td>
-                    <td><a href="admin/update?id=<c:out value='${user.id}' />">
-                        <button type="button" class="btn btn-primary">Edit</button>
-                    </a>
-                        <form action="/admin/delete" method="post">
-                            <button name="id" value="<c:out value='${user.id}' />" class="btn btn-primary">Delete
-                            </button>
-                        </form>
+
+                    <td>
+                        <a href="${updateLink}">
+                            <button type="button" class="btn btn-primary">Edit</button>
+                        </a>
+                        <a href="${deleteLink}">
+                            <button type="button" class="btn btn-primary">Delete</button>
+                        </a>
                     </td>
+
                 </tr>
+
             </c:forEach>
             </tbody>
+
         </table>
 
         <a href="${pageContext.request.contextPath}/user">
@@ -82,6 +98,7 @@
             <button type="button" class="btn btn-primary">LogOut</button>
         </a>
     </div>
+
 </div>
 </body>
 </html>
